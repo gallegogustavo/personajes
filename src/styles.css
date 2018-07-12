@@ -1,1 +1,51 @@
 /* You can add global styles to this file, and also import other style files */
+
+body {
+    /* Ubicación de la imagen */
+    background-image: url(assets/background.jpg);
+    /* Para dejar la imagen de fondo centrada, vertical y
+    
+    horizontalmente */
+    background-position: center center;
+    /* Para que la imagen de fondo no se repita */
+    background-repeat: no-repeat;
+    /* La imagen se fija en la ventana de visualización para que la altura de la imagen no supere a la del contenido */
+    background-attachment: fixed;
+    /* La imagen de fondo se reescala automáticamente con el cambio del ancho de ventana del navegador */
+    background-size: cover;
+    /* Se muestra un color de fondo mientras se está cargando la imagen
+    
+    de fondo o si hay problemas para cargarla */
+    background-color: darkgoldenrod;
+}
+
+.col-centered {
+    float: none;
+    margin: 0 auto;
+}
+
+.transp-50 {
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+    /* For IE8 and earlier */
+}
+
+.transp-0 {
+    opacity: 1;
+    filter: alpha(opacity=100);
+    /* For IE8 and earlier */
+}
+
+.color-black {
+    color: red;
+    opacity: 1;
+}
+
+.jumbotronplus {
+    background-color: transparent;
+    /*background-image: url(assets/transpBlack10.png);*/
+    background-repeat: repeat;
+    background-position: center;
+    -webkit-background-size: cover;
+    background-size: cover;
+}
