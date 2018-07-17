@@ -1,8 +1,22 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
+import { PersonajeComponent } from './components/personaje/personaje.component';
+import { AboutComponent } from './components/about/about.component';
+import { SinglepersonajeComponent } from './components/singlepersonaje/singlepersonaje.component';
+import { SearchComponent } from './components/search/search.component';
+
 const APP_ROUTES: Routes = [
+  { path: '',     redirectTo: 'home',     pathMatch: 'full'},
   { path: 'home', component: HomeComponent },
+  { path: 'personaje', component: PersonajeComponent },
+  { path: 'about', component: AboutComponent },
+  // Vamos a pasar un parametro a la ruta con heroe/:id
+  { path: 'singlepersonaje/:id', component: SinglepersonajeComponent },
+
+  // Vamos a pasar un parametro a la ruta con busca/:termino
+  { path: 'search/:termino', component: SearchComponent },
+
   { path: '**', pathMatch: 'full', redirectTo: 'home' },
 ];
 
