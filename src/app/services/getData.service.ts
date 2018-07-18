@@ -40,16 +40,27 @@ export class GetDataService {
   }
 
   searchPersonajes( termino: string): Personajes[] {
+    console.log('termino: ' + termino);
     // Creo una variable de arreglo de heroe
     let personajeArr: Personajes[] = [];
 
     termino = termino.toLowerCase();
-    for ( let personaje of this.personajes ) {
+    // for ( let personaje of this.personajes ) {
 
+    //   let bio = personaje.bio.toLowerCase();
+
+    //   if ( bio.indexOf( termino ) >= 0 ) {
+    //       console.log(personajeArr.push(personaje));
+    //   }
+    // }
+    for ( let i = 0; i < this.personajes.length; i ++ ){
+      let personaje = this.personajes[i];
       let bio = personaje.bio.toLowerCase();
 
       if ( bio.indexOf( termino ) >= 0 ) {
-          console.log(personajeArr.push(personaje));
+        personaje.idx = i;
+        console.log('El indice es: ' + personaje.idx);
+        console.log(personajeArr.push(personaje));
       }
     }
     return personajeArr;
@@ -68,4 +79,5 @@ export interface Personajes {
   bio: string;
   image: string;
   link: string;
+  idx?: number;
 }

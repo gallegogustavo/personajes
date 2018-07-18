@@ -3,5 +3,5 @@
 
 <div class="card-columns">
     <!-- Agregamos el index cuando vayamos a querer pasar este como parametro-->
-    <app-cardpersonaje [inputpersonaje]="personaje" [index]="i" *ngFor="let personaje of personajes; let i = index"></app-cardpersonaje>
+    <app-cardpersonaje [inputpersonaje]="personaje" [index]="personaje.idx" *ngFor="let personaje of personajes; let i = index"></app-cardpersonaje>
 </div>

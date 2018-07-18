@@ -1,9 +1,31 @@
 <h1>Personajes <small>Los Simpsons</small> </h1>
 <hr>
 
+
 <!--*ngFor="let personaje of personajesrecuperados; let i = index"-->
-<div class="card-columns">
-    <app-cardpersonaje [inputpersonaje]="heroe" [index]="i"></app-cardpersonaje>
+<!-- div style="width: 100%;" class="card-columns" -->
+<!--app-cardpersonaje [inputpersonaje]="heroe" [index]="i"></app-cardpersonaje-->
+<!--div style="width: 100%;" class="card animated fadeIn fast"-->
+<div class="card">
+    <div class="card-body">
+
+        <!--div style="width: 100%; align-content: center; text-align: center"-->
+        <div style="width: 100%; align-content: center; text-align: center">
+            <img style="height: auto; width: auto;" class="card-img-top" [src]="heroe.image" [alt]="heroe.name">
+        </div>
+        <!--/div-->
+        <!--div class="card-body"-->
+        <h5 class="card-title">{{heroe.name}}</h5>
+        <p class="card-text">{{heroe.bio}}</p>
+
+        <!--button (click)=['/personaje'] type="button" class="btn btn-outline-primary btn-block">
+                Inicio...
+            </button-->
+        <!--*ngIf="heroe.casa != 'DC'"-->
+        <!-- Agregamos / para que vaya a la raiz y encuentre el componente -->
+        <a [routerLink]="['/personaje']" class="btn btn-outline-primary">Inicio...</a>
+        <!--/div-->
+    </div>
 </div>
 
 

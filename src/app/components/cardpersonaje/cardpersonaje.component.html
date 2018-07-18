@@ -6,10 +6,11 @@
         <h5 class="card-title">{{inputpersonaje.name}}</h5>
         <p class="card-text">{{inputpersonaje.bio|slice:0:140}}...</p>
 
-        <button (click)="verSinglePersonaje(index)" type="button" class="btn btn-outline-primary btn-block">
+        <button (click)="verSinglePersonaje()" type="button" class="btn btn-outline-primary btn-block">
             Ver más...
-        </button> *ngIf="heroe.casa != 'DC'"
+        </button>
+        <!--*ngIf="heroe.casa != 'DC'"-->
         <!-- Agregamos / para que vaya a la raiz y encuentre el componente -->
-        <!--a [routerLink]="['/heroe',index]" class="btn btn-outline-primary">Ver más link</a-->
+        <!-- a [routerLink]="['/heroe',index]" class="btn btn-outline-primary">Ver más link</a-->
     </div>
 </div>
