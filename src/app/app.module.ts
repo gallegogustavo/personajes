@@ -15,6 +15,8 @@ import { RelatedpagesComponent } from './components/relatedpages/relatedpages.co
 import { SinglepersonajeComponent } from './components/singlepersonaje/singlepersonaje.component';
 import { SearchComponent } from './components/search/search.component';
 import { CardpersonajeComponent } from './components/cardpersonaje/cardpersonaje.component';
+import { AllcharactersComponent } from './components/allcharacters/allcharacters.component';
+import { OnecharacterComponent } from './components/onecharacter/onecharacter.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { CardpersonajeComponent } from './components/cardpersonaje/cardpersonaje
     RelatedpagesComponent,
     SinglepersonajeComponent,
     SearchComponent,
-    CardpersonajeComponent
+    CardpersonajeComponent,
+    AllcharactersComponent,
+    OnecharacterComponent
   ],
   imports: [
     BrowserModule,

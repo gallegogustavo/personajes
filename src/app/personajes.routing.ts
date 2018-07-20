@@ -5,6 +5,8 @@ import { PersonajeComponent } from './components/personaje/personaje.component';
 import { AboutComponent } from './components/about/about.component';
 import { SinglepersonajeComponent } from './components/singlepersonaje/singlepersonaje.component';
 import { SearchComponent } from './components/search/search.component';
+import { AllcharactersComponent } from './components/allcharacters/allcharacters.component';
+import { OnecharacterComponent } from './components/onecharacter/onecharacter.component';
 
 const APP_ROUTES: Routes = [
   { path: '',     redirectTo: 'home',     pathMatch: 'full'},
@@ -17,6 +19,8 @@ const APP_ROUTES: Routes = [
   // Vamos a pasar un parametro a la ruta con busca/:termino
   { path: 'search/:termino', component: SearchComponent },
 
+  { path: 'Allcharacters', component: AllcharactersComponent },
+  { path: 'Onecharacter', component: OnecharacterComponent},
   { path: '**', pathMatch: 'full', redirectTo: 'home' },
 ];
 
