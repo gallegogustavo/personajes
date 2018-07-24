@@ -1,0 +1,39 @@
+<h1>Personajes <small>Los Simpsons</small> </h1>
+<hr>
+
+
+<form (ngSubmit)="save()" #frm="ngForm">
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label>Nombre Personaje</label>
+            <input [(ngModel)]="formPersonajes.name" required type="text" class="form-control" name="name" placeholder="Nombre">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-10">
+            <label>Bio</label>
+            <textarea [(ngModel)]="formPersonajes.bio" class="form-control" name="bio-text" rows="3" placeholder="Bio"></textarea>
+
+            <!--input [(ngModel)]="formPersonajes.bio" type="text" class="form-control" name="bio" placeholder="Bio"-->
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label>Imagen</label>
+            <input [(ngModel)]="formPersonajes.image" type="text" class="form-control" name="Imagen">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label>Link</label>
+            <input [(ngModel)]="formPersonajes.link" type="text" class="form-control" name="link" placeholder="Link">
+        </div>
+    </div>
+
+    <button type="submit" [disabled]="!frm.valid" class="btn btn-primary">Sign in</button> &nbsp;
+    <a class="btn btn-primary" routerLink="/Allcharacters" role="button">Volver</a>
+</form>

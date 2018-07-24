@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import { APP_ROUTING } from './personajes.routing';
 import { GetDataService } from './services/getData.service';
@@ -15,6 +16,11 @@ import { RelatedpagesComponent } from './components/relatedpages/relatedpages.co
 import { SinglepersonajeComponent } from './components/singlepersonaje/singlepersonaje.component';
 import { SearchComponent } from './components/search/search.component';
 import { CardpersonajeComponent } from './components/cardpersonaje/cardpersonaje.component';
+import { AllcharactersComponent } from './components/allcharacters/allcharacters.component';
+import { OnecharacterComponent } from './components/onecharacter/onecharacter.component';
+import { SrvDdbbPersonajesService } from './services/srvDdbbPersonajes.service';
+import { HttpClientModule } from '@angular/common/http';
+// import { Configuration } from './app.constants';
 
 @NgModule({
   declarations: [
@@ -28,13 +34,22 @@ import { CardpersonajeComponent } from './components/cardpersonaje/cardpersonaje
     RelatedpagesComponent,
     SinglepersonajeComponent,
     SearchComponent,
-    CardpersonajeComponent
+    CardpersonajeComponent,
+    AllcharactersComponent,
+    OnecharacterComponent
   ],
   imports: [
     BrowserModule,
-    APP_ROUTING
+    APP_ROUTING,
+    FormsModule,
+    HttpClientModule
   ],
-  providers: [GetDataService],
-  bootstrap: [AppComponent]
+  providers: [
+    GetDataService,
+    SrvDdbbPersonajesService
+  ],
+  bootstrap: [
+    AppComponent
+  ]
 })
 export class AppModule { }
