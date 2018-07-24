@@ -6,6 +6,7 @@ import { DdbbPersonajes } from '../../interfaces/ddbbPersonajes';
 import { SrvDdbbPersonajesService } from '../../services/srvDdbbPersonajes.service';
 
 // import { Subscriber } from '../../../../node_modules/rxjs';
+import { TestService } from '../../services/test.service';
 
 @Component({
   selector: 'app-onecharacter',
@@ -18,10 +19,10 @@ export class OnecharacterComponent implements OnInit {
   // ws: SrvDdbbPersonajesService;
 
   formPersonajes: DdbbPersonajes = {
-    name: '', bio: '', image: '', link: ''
+    name: 'A', bio: 'S', image: 'D', link: 'F'
   };
 
-  constructor(private ws: SrvDdbbPersonajesService) { }
+  constructor(private ws: TestService) {  }
 
   ngOnInit() {
   }
@@ -31,7 +32,7 @@ export class OnecharacterComponent implements OnInit {
 
     // console.log(JSON.stringify(this.formPersonajes));
     // this.ws.get();
-    this.ws.AddPersonaje(this.formPersonajes);
+    this.ws.nuevoHeroe(this.formPersonajes);
 
   }
 }

@@ -21,6 +21,7 @@ const APP_ROUTES: Routes = [
 
   { path: 'Allcharacters', component: AllcharactersComponent },
   { path: 'Onecharacter/:id', component: OnecharacterComponent},
+  { path: 'Onecharacter', component: OnecharacterComponent},
   { path: '**', pathMatch: 'full', redirectTo: 'home' },
 ];
 
