@@ -19,7 +19,7 @@ import { CardpersonajeComponent } from './components/cardpersonaje/cardpersonaje
 import { AllcharactersComponent } from './components/allcharacters/allcharacters.component';
 import { OnecharacterComponent } from './components/onecharacter/onecharacter.component';
 import { SrvDdbbPersonajesService } from './services/srvDdbbPersonajes.service';
-import { HttpClientModule } from '../../node_modules/@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 // import { Configuration } from './app.constants';
 
 @NgModule({

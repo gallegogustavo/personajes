@@ -3,6 +3,5 @@ export interface DdbbPersonajes {
     bio: string;
     image: string;
     link: string;
-    pepe: string;
     key?: string;
 }

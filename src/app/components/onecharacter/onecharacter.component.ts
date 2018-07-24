@@ -18,7 +18,7 @@ export class OnecharacterComponent implements OnInit {
   // ws: SrvDdbbPersonajesService;
 
   formPersonajes: DdbbPersonajes = {
-    name: '', bio: '', image: '', link: '', pepe: ''
+    name: '', bio: '', image: '', link: ''
   };
 
   constructor(private ws: SrvDdbbPersonajesService) { }
@@ -29,9 +29,9 @@ export class OnecharacterComponent implements OnInit {
 
   save() {
 
-    console.log(JSON.stringify(this.formPersonajes));
-    this.ws.get();
-    this.ws.Put(this.formPersonajes);
+    // console.log(JSON.stringify(this.formPersonajes));
+    // this.ws.get();
+    this.ws.AddPersonaje(this.formPersonajes);
 
   }
 }
