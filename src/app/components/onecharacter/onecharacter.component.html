@@ -2,7 +2,7 @@
 <hr>
 
 
-<form (ngSubmit)="save()" #frm="ngForm">
+<form (ngSubmit)="genericAction(1)" #frm="ngForm">
 
     <div class="form-row">
         <div class="form-group col-md-6">
@@ -15,15 +15,13 @@
         <div class="form-group col-md-10">
             <label>Bio</label>
             <textarea [(ngModel)]="formPersonajes.bio" class="form-control" name="bio-text" rows="3" placeholder="Bio"></textarea>
-
-            <!--input [(ngModel)]="formPersonajes.bio" type="text" class="form-control" name="bio" placeholder="Bio"-->
         </div>
     </div>
 
     <div class="form-row">
         <div class="form-group col-md-6">
             <label>Imagen</label>
-            <input [(ngModel)]="formPersonajes.image" type="text" class="form-control" name="Imagen">
+            <input [(ngModel)]="formPersonajes.image" type="text" class="form-control" name="Imagen" placeholder="Imagen">
         </div>
     </div>
 
@@ -34,6 +32,6 @@
         </div>
     </div>
 
-    <button type="submit" [disabled]="!frm.valid" class="btn btn-primary">Sign in</button> &nbsp;
+    <button type="submit" [disabled]="!frm.valid" class="btn btn-primary">Aceptar</button> &nbsp;
     <a class="btn btn-primary" routerLink="/Allcharacters" role="button">Volver</a>
 </form>
