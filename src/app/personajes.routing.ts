@@ -20,7 +20,7 @@ const APP_ROUTES: Routes = [
   { path: 'search/:termino', component: SearchComponent },
 
   { path: 'Allcharacters', component: AllcharactersComponent },
-  { path: 'Onecharacter/:id', component: OnecharacterComponent},
+  { path: 'Onecharacter/:id/:action', component: OnecharacterComponent},
   { path: 'Onecharacter', component: OnecharacterComponent},
   { path: '**', pathMatch: 'full', redirectTo: 'home' },
 ];

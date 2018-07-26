@@ -6,7 +6,7 @@ import { DdbbPersonajes } from '../../interfaces/ddbbPersonajes';
 import { SrvDdbbPersonajesService } from '../../services/srvDdbbPersonajes.service';
 
 // import { Subscriber } from '../../../../node_modules/rxjs';
-import { TestService } from '../../services/test.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-onecharacter',
@@ -19,23 +19,69 @@ export class OnecharacterComponent implements OnInit {
   // ws: SrvDdbbPersonajesService;
 
   formPersonajes: DdbbPersonajes = {
-    name: 'A', bio: 'S', image: 'D', link: 'F'
+    name: '', bio: '', image: '', link: ''
   };
 
-  constructor(private ws: TestService) {  }
+  personajeid: string;
+  action: number;
+  private data: DdbbPersonajes = {
+    name: 'a', bio: 'b', image: 'c', link: 'd'
+  };
+  persrec: DdbbPersonajes[] = [];
+
+  constructor(private ws: SrvDdbbPersonajesService, private route: ActivatedRoute) {  }
 
   ngOnInit() {
-  }
+    console.log('onecharacter.ngoninit');
+    /**this.personajeid = this.route.params['id'];
+    console.log(this.personajeid);
+    this.action = this.route.params['action'];
+    console.log(this.action);*/
 
+    this.route.params.subscribe( parametros => {
+      this.personajeid = parametros['id'];
+      this.action = parametros['action'];
+    });
+    console.log(this.personajeid);
+    console.log(this.action);
+
+    if (this.action > 1) {
+      this.formPersonajes = this.getOne(this.personajeid);
+    }
+
+    console.log('fin onecharacter.ngoninit');
+  }
+ 
+  getOne(pid: string): DdbbPersonajes {
+    console.log('inicio component.getOne');
+    this.ws.GetOne(this.personajeid).subscribe(data => {
+      console.log(data);
+    });
+    return this.data;
+  }
 
   save() {
 
+<<<<<<< HEAD
     // console.log(JSON.stringify(this.formPersonajes));
     // this.ws.get();
     this.ws.nuevoHeroe(this.formPersonajes).subscribe ( data => {
       console.log('Obtengo esta data: ');
       console.log(data);
     })
+=======
+    this.ws.AddPersonaje(this.formPersonajes);
+>>>>>>> 72ad4879151ce49b182f032d7066fa82b1fffc1e
 
   }
+
+  update() {
+
+    this.ws.UpdatePersonaje(this.formPersonajes);
+  }
+
+  genericAction(action: number) {
+    this.ws.ABMPersonaje(this.formPersonajes, action);
+  }
+
 }
