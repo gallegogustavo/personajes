@@ -32,7 +32,10 @@ export class OnecharacterComponent implements OnInit {
 
     // console.log(JSON.stringify(this.formPersonajes));
     // this.ws.get();
-    this.ws.nuevoHeroe(this.formPersonajes);
+    this.ws.nuevoHeroe(this.formPersonajes).subscribe ( data => {
+      console.log('Obtengo esta data: ');
+      console.log(data);
+    })
 
   }
 }
