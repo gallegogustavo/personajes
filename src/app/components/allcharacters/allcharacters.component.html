@@ -16,15 +16,18 @@
         <tbody>
             <tr *ngFor="let datavalues of personajesrecuperados; let i = index">
                 <td>
-                    <a [routerLink]="['/Onecharacter',datavalues.key]">
-                        <img class="img-rounded" style="width: 16px; height: 16px;" src="../../../assets/delete.png " />
+                    <a [routerLink]="['/Onecharacter',datavalues.key,2]">
+                        <img class="img-rounded" style="height: 16px;" src="../../../assets/edit.png" />
+                    </a>
+                    <a [routerLink]="['/Onecharacter',datavalues.key,3]">
+                        <img class="img-rounded" style="width: 16px; height: 16px;" src="../../../assets/delete.png" />
                     </a>
                 </td>
                 <td>{{ datavalues.name }}</td>
                 <td>{{ datavalues.bio|slice:0:50 }}</td>
                 <td>{{ datavalues.image }}</td>
                 <td>{{ datavalues.link }}</td>
-                <td>{{ datavalues.key }}</td>
+                <td hidden>{{ datavalues.key }}</td>
             </tr>
 
             <!--tr>

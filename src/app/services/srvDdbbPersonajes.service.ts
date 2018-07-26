@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 // import { Configuration } from '../app.constants';
 import { DdbbPersonajes } from '../interfaces/ddbbPersonajes';
-import { HttpClient, HttpHeaders} from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 // import { mapChildrenIntoArray } from '../../../node_modules/@angular/router/src/url_tree';
 import { map, catchError, tap } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -117,8 +117,10 @@ ABMPersonaje ( objPersonaje: DdbbPersonajes, action: number) {
 GetAll() {
 
   // this.newdata = [];
-  // console.log('inicio getall');
+  console.log('inicio getall');
   this.link2register = this.conf + '.json';
+
+  const _params = new HttpParams();
 
   return this.http.get(this.link2register,
     {
@@ -126,19 +128,49 @@ GetAll() {
     }).pipe(map(res => {
       return res;
     }));
-
-// this.newdata = 
-    // console.log(this.newdata);
-
-    // return this.newdata;
 }
+
+
+
+GetOne(pid: string) {
+
+  console.log('srvDdbbPersonajes.GetOne:' + pid);
+
+  // this.newdata = [];
+  // console.log('inicio getall');
+  this.link2register = this.conf + '.json';
+
+  let _params = new HttpParams().set('key', pid);
+
+  let _headers = new HttpHeaders().set('Content-Type', 'aplication/json');
+  // headers.append('Content-Type', 'application/json');
+  // let headers = new HttpHeaders().set('header1', hvalue1); // create header object
+  // headers = headers.append('header2', hvalue2); // add a new header, creating a new object
+  // headers = headers.append('header3', hvalue3); // add another header
+
+// let params = new HttpParams().set('param1', value1); // create params object
+// params = params.append('param2', value2); // add a new param, creating a new object
+// params = params.append('param3', value3); // add another param
+
+// headers: _headers,
+  return this.http.get(this.link2register,
+    {
+      headers: _headers, params: _params
+    }).pipe(map(res => {
+      console.log(res); console.log('ggg');
+      return res;
+    }, error => {console.error(error); alert('error'); }));
+
+}
+
+
 // data => { this.contact = []; data.forEach( ( x ) => { this.contact.push( x ); } );}, err => { } 
 
 // res => this.data = res    funciona
 // data => console.log(data)
 
 
-getaction (action: number) {
+/**getaction (action: number) {
     if (action === 1) {
       return 'post';
     } else {
@@ -148,6 +180,6 @@ getaction (action: number) {
         return 'put';
       }
     }
-}
+}*/
 
 }

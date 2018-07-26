@@ -6,6 +6,7 @@ import { DdbbPersonajes } from '../../interfaces/ddbbPersonajes';
 import { SrvDdbbPersonajesService } from '../../services/srvDdbbPersonajes.service';
 
 // import { Subscriber } from '../../../../node_modules/rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-onecharacter',
@@ -21,11 +22,43 @@ export class OnecharacterComponent implements OnInit {
     name: '', bio: '', image: '', link: ''
   };
 
-  constructor(private ws: SrvDdbbPersonajesService) {  }
+  personajeid: string;
+  action: number;
+  private data: DdbbPersonajes = {
+    name: 'a', bio: 'b', image: 'c', link: 'd'
+  };
+  persrec: DdbbPersonajes[] = [];
+
+  constructor(private ws: SrvDdbbPersonajesService, private route: ActivatedRoute) {  }
 
   ngOnInit() {
-  }
+    console.log('onecharacter.ngoninit');
+    /**this.personajeid = this.route.params['id'];
+    console.log(this.personajeid);
+    this.action = this.route.params['action'];
+    console.log(this.action);*/
 
+    this.route.params.subscribe( parametros => {
+      this.personajeid = parametros['id'];
+      this.action = parametros['action'];
+    });
+    console.log(this.personajeid);
+    console.log(this.action);
+
+    if (this.action > 1) {
+      this.formPersonajes = this.getOne(this.personajeid);
+    }
+
+    console.log('fin onecharacter.ngoninit');
+  }
+ 
+  getOne(pid: string): DdbbPersonajes {
+    console.log('inicio component.getOne');
+    this.ws.GetOne(this.personajeid).subscribe(data => {
+      console.log(data);
+    });
+    return this.data;
+  }
 
   save() {
 
