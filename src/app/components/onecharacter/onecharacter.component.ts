@@ -7,6 +7,7 @@ import { SrvDdbbPersonajesService } from '../../services/srvDdbbPersonajes.servi
 
 // import { Subscriber } from '../../../../node_modules/rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-onecharacter',
@@ -16,72 +17,88 @@ import { ActivatedRoute } from '@angular/router';
 
 export class OnecharacterComponent implements OnInit {
 
-  // ws: SrvDdbbPersonajesService;
-
   formPersonajes: DdbbPersonajes = {
     name: '', bio: '', image: '', link: ''
   };
 
   personajeid: string;
   action: number;
+  /**
   private data: DdbbPersonajes = {
     name: 'a', bio: 'b', image: 'c', link: 'd'
   };
-  persrec: DdbbPersonajes[] = [];
+  */
+  persrec: DdbbPersonajes [] = [];
 
   constructor(private ws: SrvDdbbPersonajesService, private route: ActivatedRoute) {  }
 
   ngOnInit() {
-    console.log('onecharacter.ngoninit');
-    /**this.personajeid = this.route.params['id'];
-    console.log(this.personajeid);
-    this.action = this.route.params['action'];
-    console.log(this.action);*/
+    // console.log('inicio onecharacter.ngoninit');
 
     this.route.params.subscribe( parametros => {
       this.personajeid = parametros['id'];
       this.action = parametros['action'];
     });
-    console.log(this.personajeid);
-    console.log(this.action);
 
     if (this.action > 1) {
       this.formPersonajes = this.getOne(this.personajeid);
+      // console.log(this.formPersonajes);
     }
 
-    console.log('fin onecharacter.ngoninit');
+    // console.log('fin onecharacter.ngoninit');
   }
- 
+
   getOne(pid: string): DdbbPersonajes {
-    console.log('inicio component.getOne');
+    // console.log('inicio function getOne...');
+    let _personajes: DdbbPersonajes = {
+      name: '', bio: '', image: '', link: ''
+    };
+
     this.ws.GetOne(this.personajeid).subscribe(data => {
-      console.log(data);
+      // console.log(JSON.parse(JSON.stringify(data)));
+      // console.log(data);
+      for (let value in data) {
+        // console.log(data[value]);
+        _personajes[value] = data[value];
+        // console.log(_personajes[value]);
+        };
+      // country = jsonConvert.deserialize(jsonObject, Country);
+      // this.persrec.push(JSON.parse(JSON.stringify(data)));
+      // console.log(data);
+      // this.persrec.push(data);
     });
-    return this.data;
+
+    // console.log('ggg3');
+    // console.log(_personajes);
+    // console.log('ggg4');
+    return _personajes;
   }
 
-  save() {
+  // save() {
+  //  this.ws.AddPersonaje(this.formPersonajes);
+  // }
 
-<<<<<<< HEAD
-    // console.log(JSON.stringify(this.formPersonajes));
-    // this.ws.get();
-    this.ws.nuevoHeroe(this.formPersonajes).subscribe ( data => {
-      console.log('Obtengo esta data: ');
-      console.log(data);
-    })
-=======
-    this.ws.AddPersonaje(this.formPersonajes);
->>>>>>> 72ad4879151ce49b182f032d7066fa82b1fffc1e
+  // update() {
+  //  this.ws.UpdatePersonaje(this.formPersonajes);
+  // }
 
-  }
+  genericAction(paction: number) {
 
-  update() {
+    if (paction.toString() === '3') {
 
-    this.ws.UpdatePersonaje(this.formPersonajes);
-  }
+      if (confirm('Está seguro de eliminar el regstro?')) {
+        this.ws.ABMPersonaje(this.formPersonajes, paction, this.personajeid);
+      }
+    } else {
 
-  genericAction(action: number) {
-    this.ws.ABMPersonaje(this.formPersonajes, action);
-  }
+        this.ws.ABMPersonaje(this.formPersonajes, paction, this.personajeid);
+      }
+
+    if (paction.toString() === '1') {
+      console.log('reload');
+      this.ngOnInit();
+    }
+}
 
 }
+

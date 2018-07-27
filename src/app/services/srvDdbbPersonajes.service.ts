@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
 // import { Configuration } from '../app.constants';
 import { DdbbPersonajes } from '../interfaces/ddbbPersonajes';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 // import { mapChildrenIntoArray } from '../../../node_modules/@angular/router/src/url_tree';
-import { map, catchError, tap } from 'rxjs/operators';
+import { map, catchError, tap, timestamp } from 'rxjs/operators';
+
 import { Router, ActivatedRoute } from '@angular/router';
-// import { Observable, of } from 'rxjs';
+// import { Observable } from '../../../node_modules/rxjs';
+
+import { Observable } from 'rxjs';
 // import { errorHandler } from '../../../node_modules/@angular/platform-browser/src/browser';
 
 
@@ -64,7 +67,9 @@ AddPersonaje ( objPersonaje: DdbbPersonajes) {
 }
 
 
-ABMPersonaje ( objPersonaje: DdbbPersonajes, action: number) {
+ABMPersonaje ( objPersonaje: DdbbPersonajes,
+              action: number,
+              personajeid: string) {
 
   /**
   if (action === 1) {
@@ -74,28 +79,62 @@ ABMPersonaje ( objPersonaje: DdbbPersonajes, action: number) {
   }
   */
 
-  let body = JSON.stringify(objPersonaje);
 
+  console.log('ABMPersonaje');
+  console.log(objPersonaje);
+  console.log(action);
+
+  let body = JSON.stringify(objPersonaje);
+  console.log('body:' + body);
   let headers = new HttpHeaders ({ 'Content-Type': 'application/json' });
 
-    // console.log(this.link2register);
-
+  switch (action.toString()) {
+    case '1': {
+        // insert
+        this.link2register = this.conf + '.json';
+        return this.http.post(this.link2register, body, {headers}).subscribe(
+          data => {this.router.navigate(['/Onecharacter', '0', 1]);
+          }, error => {console.error(error); alert('error'); });
+         // break;
+    }
+    case '2': {
+         // update
+         this.link2register = this.conf + '/' + personajeid + '.json';
+         return this.http.put(this.link2register, body, {headers}).subscribe(
+           data => {alert('Operación completada con éxito!'); this.router.navigate(['/Allcharacters']);
+         }, error => {console.error(error); alert('error'); });
+         // break;
+    }
+    case '3': {
+        // delete
+        this.link2register = this.conf + '/' + personajeid + '.json';
+        return this.http.delete(this.link2register, {headers}).subscribe(
+          data => {alert('Operación completada con éxito!'); this.router.navigate(['/Allcharacters']);
+          }, error => {console.error(error); alert('error'); });
+        // break;
+    }
+    default: {
+      console.log('default');
+      break;
+    }
+  }
+  /** 
     switch (action) {
       case 1: {
         // insert
         this.link2register = this.conf + '.json';
-
-        return this.http.post(this.link2register, body, {headers}).subscribe(
-          data => {this.router.navigate(['/Onecharacter', data])
-          }, error => {console.error(error); alert('error'); });
-        // break;
+        console.log(body);
+        // return this.http.post(this.link2register, body, {headers}).subscribe(
+        //  data => {this.router.navigate(['/Onecharacter', data]);
+        //  }, error => {console.error(error); alert('error'); });
+        break;
       }
       case 2: {
          // update
         this.link2register = this.conf + '/-LICSE-aGdbjIJeB6KQa.json';
 
         return this.http.put(this.link2register, body, {headers}).subscribe(
-          data => {this.router.navigate(['/Onecharacter', data])
+          data => {this.router.navigate(['/Onecharacter', data]);
         }, error => {console.error(error); alert('error'); });
         // break;
       }
@@ -104,35 +143,60 @@ ABMPersonaje ( objPersonaje: DdbbPersonajes, action: number) {
         this.link2register = this.conf + '/-LICSE-aGdbjIJeB6KQa.json';
 
         return this.http.delete(this.link2register, {headers}).subscribe(
-          data => {this.router.navigate(['/Onecharacter', data])
+          data => {this.router.navigate(['/Onecharacter', data]);
         }, error => {console.error(error); alert('error'); });
         // break;
       }
    }
+   */
 }
 
 
 
 
 GetAll() {
-
-  // this.newdata = [];
-  console.log('inicio getall');
   this.link2register = this.conf + '.json';
-
-  const _params = new HttpParams();
-
+  let _headers = new HttpHeaders().set('Content-Type', 'aplication/json');
   return this.http.get(this.link2register,
     {
-        headers: new HttpHeaders().set('Accept', 'aplication/json')
+      headers: _headers
     }).pipe(map(res => {
       return res;
-    }));
+    }, error => {console.error(error); alert('error'); }));
+    // headers: new HttpHeaders().set('Accept', 'aplication/json')
+}
+/** 
+GetOne(pid: string): any {
+  this.link2register = this.conf + '/' + pid + '.json';
+  let _headers = new HttpHeaders().set('Content-Type', 'aplication/json');
+  return this.http.get(this.link2register,
+    {
+      headers: _headers
+    }).pipe(map(res => {
+      return res;
+    }, error => {console.error(error); alert('error'); }));
+}
+*/
+GetOne(pid: string) {
+  this.link2register = this.conf + '/' + pid + '.json';
+  let _headers = new HttpHeaders().set('Content-Type', 'aplication/json');
+  return this.http.get(this.link2register)
+                  .pipe(map(res => {
+                    return res;
+                  }));
+}
+
+private extractData(res: Response) {
+  console.log('ggg1'); console.log(res); console.log('ggg2');
+  let body = res.json();
+  console.log(body);
+  return ''; // body.data || { };
 }
 
 /*
 Cambios sugeridos
 */
+/** 
 heroeURL = 'https://personajes-a64a6.firebaseio.com/';
 
 get(id:string){
@@ -147,57 +211,9 @@ get(id:string){
     return res;
   }));
 }
+*/
 /*
 Fin Cambios sugeridos
 */
-GetOne(pid: string) {
-
-  console.log('srvDdbbPersonajes.GetOne:' + pid);
-
-  // this.newdata = [];
-  // console.log('inicio getall');
-  this.link2register = this.conf + '.json';
-
-  let _params = new HttpParams().set('key', pid);
-
-  let _headers = new HttpHeaders().set('Content-Type', 'aplication/json');
-  // headers.append('Content-Type', 'application/json');
-  // let headers = new HttpHeaders().set('header1', hvalue1); // create header object
-  // headers = headers.append('header2', hvalue2); // add a new header, creating a new object
-  // headers = headers.append('header3', hvalue3); // add another header
-
-// let params = new HttpParams().set('param1', value1); // create params object
-// params = params.append('param2', value2); // add a new param, creating a new object
-// params = params.append('param3', value3); // add another param
-
-// headers: _headers,
-  return this.http.get(this.link2register,
-    {
-      headers: _headers, params: _params
-    }).pipe(map(res => {
-      console.log(res); console.log('ggg');
-      return res;
-    }, error => {console.error(error); alert('error'); }));
-
-}
-
-
-// data => { this.contact = []; data.forEach( ( x ) => { this.contact.push( x ); } );}, err => { } 
-
-// res => this.data = res    funciona
-// data => console.log(data)
-
-
-/**getaction (action: number) {
-    if (action === 1) {
-      return 'post';
-    } else {
-      if (action === 3) {
-        return 'delete';
-      } else {
-        return 'put';
-      }
-    }
-}*/
 
 }
